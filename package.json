@@ -1,6 +1,6 @@
 {
   "name": "@sentiric/stream-sdk",
-  "version": "0.8.15",
+  "version": "0.9.0",
   "description": "Universal Sentiric Stream SDK. High-performance communication engine for Voice, Chat and AI interactions.",
   "engines": {
     "node": ">=20"
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.2.3",
-    "@sentiric/contracts": "git+https://github.com/sentiric/sentiric-contracts.git#v1.23.0",
+    "@sentiric/contracts": "git+https://github.com/sentiric/sentiric-contracts.git#v1.25.0",
     "protobufjs": "^8.0.0"
   }
 }

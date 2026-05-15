@@ -24,6 +24,7 @@ export interface StreamClientOptions {
   ttsVoiceId?: string;
   onAudioReceived?: (chunk: Uint8Array) => void;
   onTranscript?: (data: TranscriptEvent) => void;
+  onMediaEvent?: (data: any) => void;
   onStatusUpdate?: (statusStr: string) => void;
   onCognitiveMap?: (data: any) => void;
   onError?: (error: any) => void;
@@ -171,6 +172,12 @@ export class SentiricStreamClient {
     this.safeSend(StreamSessionRequest.encode(req).finish());
   }
 
+  
+  public requestMediaGeneration(model: string, prompt: string) {
+    if (!this.isReady) return;
+    this.sendText(`[CMD:GENERATE_VIDEO] ${model}|${prompt}`);
+  }
+
   public sendText(text: string) {
     if (!this.isReady || !this.ws) return;
     const req = StreamSessionRequest.create({
@@ -194,6 +201,13 @@ export class SentiricStreamClient {
       } else if (message.clearAudioBuffer) {
         this.audioManager?.flushPlayback();
       } else if (message.statusUpdate) {
+        try {
+          const status = JSON.parse(message.statusUpdate);
+          if (status.type === "MEDIA_GENERATION" && this.options.onMediaEvent) {
+            this.options.onMediaEvent(status);
+            return;
+          }
+        } catch(e) {}
         if (this.options.onStatusUpdate) {
           this.options.onStatusUpdate(message.statusUpdate);
         }
