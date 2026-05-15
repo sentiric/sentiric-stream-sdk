@@ -1,1 +1,0 @@
-{"version":3,"file":"main-DseendPz.js","names":[],"sources":["../../index.html?html-proxy&index=1.js"],"sourcesContent":["\n        document.getElementById('v').innerText = `v${__APP_VERSION__}`;\n        console.log(\"🌊 Sentiric SDK Core Loaded Successfully\");\n    "],"mappings":"+rBACQ,SAAS,eAAe,KAAK,UAAY,UACzC,QAAQ,IAAI"}
